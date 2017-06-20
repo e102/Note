@@ -27,13 +27,13 @@ let add = (title, body) => {
     let all_notes = fetch_all_notes();
     for (let i = 0; i < all_notes.length; i++) {
         if (current_note.title === all_notes[i].title) {
-            return `A note with the title ${current_note.title} already exists. Please use a new title.`;
+            throw "A note with that title already exists";
         }
     }
 
     all_notes.push(current_note);
     save_notes(all_notes);
-    return `Added note with title ${current_note.title}`;
+    return current_note;
 
 };
 

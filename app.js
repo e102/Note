@@ -13,7 +13,13 @@ let text = input_array[2];
 
 
 if (command === "add") {
-    console.log(notes.add(title, text));
+    try {
+        let new_note = notes.add(title, text);
+        console.log(`Added note with title ${new_note.title}`);
+
+    } catch (e) {
+        console.log(e);
+    }
 }
 else if (command === "list") {
     console.log(notes.list());
