@@ -38,11 +38,34 @@ let add = (title, body) => {
 };
 
 let remove = (title) => {
-    return `Removing note with title ${title}`;
+    let all_notes = fetch_all_notes();
+
+    for (let i = 0; i <= all_notes.length; i++) {
+        if (all_notes[i].title === title) {
+            let deleted_node = all_notes[i];
+            all_notes.splice(i, 1);
+            save_notes(all_notes);
+            return deleted_node;
+        }
+    }
+
+    throw "No note with that title found";
 };
 
 let list = () => {
-    return "Listing notes";
+    let all_notes = fetch_all_notes();
+    let notes_list = [];
+
+    if (all_notes.length === 0) {
+        notes_list.push("No notes found");
+    }
+    else {
+        for (let i = 0; i < all_notes.length; i++) {
+            notes_list.push(all_notes[i].title);
+        }
+    }
+
+    return notes_list;
 };
 
 let read = (title = "untitled") => {

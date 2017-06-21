@@ -22,17 +22,25 @@ if (command === "add") {
     }
 }
 else if (command === "list") {
-    console.log(notes.list());
+    notes_list = notes.list();
+    for (let i = 0; i < notes_list.length; i++) {
+        console.log(notes_list[i]);
+    }
 }
 else if (command === "read") {
     console.log(notes.read(title));
 }
 else if (command === "remove") {
-    console.log(notes.remove(title));
+    try {
+        let deleted_note = notes.remove(title);
+        console.log(`Deleted note with title ${deleted_note.title}`);
+    } catch (e) {
+        console.log(e);
+    }
 }
 else if (command === "help") {
     console.log(notes.showHelp());
 }
 else {
-    console.log(`command not recognized. Type help to see a list of commands`);
+    console.log(`Command not recognized. Type help to see a list of commands`);
 }
