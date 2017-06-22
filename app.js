@@ -21,6 +21,19 @@ if (command === "add") {
         console.log(e);
     }
 }
+else if (command === "read") {
+    try {
+        let target_note = notes.read(title);
+        console.log(`
+        Title: ${target_note.title}
+        Text: ${target_note.text}
+        `);
+    }
+    catch (e) {
+        console.log(e);
+    }
+
+}
 else if (command === "list") {
     notes_list = notes.list();
     for (let i = 0; i < notes_list.length; i++) {
