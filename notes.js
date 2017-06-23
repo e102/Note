@@ -43,6 +43,7 @@ let remove = (title) => {
     if (all_notes.length === filtered_notes.length) {
         throw "No note with this title found";
     }
+
     else {
         save_notes(filtered_notes);
         return {
@@ -53,18 +54,13 @@ let remove = (title) => {
 
 let list = () => {
     let all_notes = fetch_all_notes();
-    let notes_list = [];
 
     if (all_notes.length === 0) {
-        notes_list.push("No notes found");
+        throw "No notes found";
     }
     else {
-        for (let i = 0; i < all_notes.length; i++) {
-            notes_list.push(all_notes[i].title);
-        }
+        return all_notes;
     }
-
-    return notes_list;
 };
 
 let read = (title) => {
