@@ -81,19 +81,10 @@ let read = (title) => {
     }
 };
 
-let showHelp = () => {
-    return `
-    add title=something text=something: add a note
-    remove title=something: delete a note
-    read: open a note
-    list: list all notes`;
-};
-
 module.exports = {
     add,
     remove,
     list,
     read,
-    showHelp
 };
 
