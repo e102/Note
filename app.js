@@ -1,11 +1,32 @@
 const lodash = require('lodash');
 const yargs = require('yargs');
 
-input_array = yargs.argv._;
 
-let command = input_array[0];
-let title = input_array[1];
-let text = input_array[2];
+const title_options = {
+    describe: 'Title of the note',
+    demand: true,
+};
+
+input_array = yargs.command('add', 'Add a new note', {
+    title: title_options,
+    body: {
+        describe: 'The content of your note',
+        demand: false    //title only notes such as 'buy milk' should be allowed
+    }
+})
+    .command('list', 'List all notes')
+    .command('read', 'Read a note', {
+        title: title_options
+    })
+    .command('remove', 'Remove a note', {
+        title: title_options
+    })
+    .help()
+    .argv;
+
+const command = input_array._[0];
+const title = input_array._[1];
+const text = input_array._[2];
 
 parse_command(command, title, text);
 
@@ -13,11 +34,7 @@ parse_command(command, title, text);
 function parse_command(command, title, text) {
     const notes = require('./notes');
 
-    if (command === "help") {
-        console.log(notes.showHelp());
-    }
-
-    else if (command === "add") {
+    if (command === "add") {
         try {
             let new_note = notes.add(title, text);
             console.log(`Added note with title ${new_note.title}`);
@@ -58,6 +75,6 @@ function parse_command(command, title, text) {
         }
     }
     else {
-        console.log(`Command not recognized. Type help to see a list of commands`);
+        console.log(`Command not recognized. Type --help to see a list of commands`);
     }
 }
